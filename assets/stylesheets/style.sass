@@ -1,0 +1,73 @@
+/* color palettes */
+$white: #fff
+$black: #000
+$borderLightGrey: #d1d1d1
+
+/* mixins */
+=textProperties ($size, $lineHeight, $color)
+  font-size: $size
+  line-height: $lineHeight
+  color: $color
+
+/* style properties */
+.header-controls
+  padding: 20px 0
+  border-bottom: 1px solid $borderLightGrey
+  margin-bottom: 40px
+  .add-filter-note
+    padding: 20px 0
+  .filter-form
+    margin-left: 100px
+    input
+      width: auto
+      margin-right: 10px
+    button
+      line-height: 32px
+      background: transparent
+      border: none
+
+.add-note-form
+  .description
+    width: 400px
+    height: 34px
+  .button-wrapper
+    margin-top: 25px
+  .button-control
+    margin-right: 20px
+  .form-group
+    margin-right: 40px
+
+.notes-listing-table
+  list-style-type: none
+  padding: 0
+  margin: 0 0 40px
+  .table-content
+    display: table
+    width: 100%
+    &:first-child
+      .table-cell
+        border-top: 1px solid $borderLightGrey
+    .table-cell
+      display: table-cell
+      padding: 10px
+      border-bottom: 1px solid $borderLightGrey
+      border-right: 1px solid $borderLightGrey
+      &:first-child
+        border-left: 1px solid $borderLightGrey
+  .table-head
+    +textProperties(12px, 18px, $black)
+  .table-body
+    +textProperties(14px, 20px, $black)
+  .serial
+    width: 6%
+  .title, .actions
+    width: 20%
+  .description
+    width: 54%
+  .action-link
+    margin-right: 10px
+  .description-area
+    height: 34px
+
+.cursor-pointer
+  cursor: pointer
