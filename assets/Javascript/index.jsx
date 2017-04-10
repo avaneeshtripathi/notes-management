@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import Reducer from './reducer';
-import Container from './container';
-require('../stylesheets/style.sass');
+import Reducer from './Reducer';
+import Container from './Container';
+require('../Stylesheets/Style.sass');
 
 const store = createStore(Reducer);
 
 class Main extends React.Component{
-  render () {
+  render() {
     return (
       <Provider store={store}>
         <Container />

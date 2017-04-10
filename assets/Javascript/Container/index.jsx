@@ -1,8 +1,8 @@
 import React from 'react';
 import Underscore from 'underscore';
 import Serialize from 'form-serialize';
-import { connect } from 'react-redux';
-import { handleAddNote, addNote, handleEditNote, updateNote, deleteNote, filterNote } from '../action';
+import {connect} from 'react-redux';
+import {handleAddNote, addNote, handleEditNote, updateNote, deleteNote, filterNote} from '../Action';
 
 class Container extends React.Component{
   constructor(props) {
@@ -16,42 +16,42 @@ class Container extends React.Component{
     this.getFilteredList = this.getFilteredList.bind(this);
   }
 
-  handleAddNoteSection (event = new Event('')) {
+  handleAddNoteSection(event = new Event('')) {
     event.preventDefault();
-    const { handleAddNote } = this.props;
+    const {handleAddNote} = this.props;
     handleAddNote(!this.props.addNotesStatus);
   }
 
-  submitForm (event = new Event('')) {
+  submitForm(event = new Event('')) {
     event.preventDefault();
-    const { addNote } = this.props;
-    let formData = Serialize(this.refs.addNoteForm, { hash: true });
+    const {addNote} = this.props;
+    let formData = Serialize(this.refs.addNoteForm, {hash: true});
     addNote(formData);
   }
 
-  handleEditNote (noteId) {
-    const { handleEditNote } = this.props;
+  handleEditNote(noteId) {
+    const {handleEditNote} = this.props;
     handleEditNote(noteId);
   }
 
-  updateNote (formData) {
-    const { updateNote } = this.props;
+  updateNote(formData) {
+    const {updateNote} = this.props;
     updateNote(formData);
   }
 
-  deleteNote (noteId) {
-    const { deleteNote } = this.props;
+  deleteNote(noteId) {
+    const {deleteNote} = this.props;
     deleteNote(noteId);
   }
 
-  filterNotes (event = new Event('')) {
+  filterNotes(event = new Event('')) {
     event.preventDefault();
-    const { filterNote } = this.props;
-    let formData = Serialize(this.refs.filterNotesForm, { hash: true });
+    const {filterNote} = this.props;
+    let formData = Serialize(this.refs.filterNotesForm, {hash: true});
     filterNote(formData.filter);
   }
 
-  getFilteredList () {
+  getFilteredList() {
     let filterString = this.props.filterString ? this.props.filterString.toLowerCase() : '';
     return filterString
       ? Underscore.filter(this.props.notesList, (note) => {
@@ -60,7 +60,7 @@ class Container extends React.Component{
       : this.props.notesList;
   }
 
-  render () {
+  render() {
     return (
       <section className="container">
         <div className="header-controls">
@@ -119,7 +119,7 @@ class Container extends React.Component{
               </li>
               {Underscore.map(this.getFilteredList(), (note, key) => {
                 return (
-                  <ListItem key={key} itemKey={key} note={note} editNote={this.handleEditNote} updateNote={this.updateNote} deleteNote={this.deleteNote} />
+                  <ListItem key={note.id} itemKey={key} note={note} editNote={this.handleEditNote} updateNote={this.updateNote} deleteNote={this.deleteNote} />
                 )
               })}
             </ul>
@@ -138,26 +138,26 @@ class ListItem extends React.Component{
     this.deleteNote = this.deleteNote.bind(this);
   }
 
-  editNote (event = new Event('')) {
+  editNote(event = new Event('')) {
     event.preventDefault();
     this.props.editNote(this.props.note.id);
   }
 
-  updateNote (event = new Event('')) {
+  updateNote(event = new Event('')) {
     event.preventDefault();
-    let formData = Serialize(this.refs.updateNoteForm, { hash: true });
+    let formData = Serialize(this.refs.updateNoteForm, {hash: true});
     if (formData.title !== this.props.note.title || formData.description !== this.props.description) {
       formData.id = this.props.note.id;
       this.props.updateNote(formData);
     }
   }
 
-  deleteNote (event = new Event('')) {
+  deleteNote(event = new Event('')) {
     event.preventDefault();
     this.props.deleteNote(this.props.note.id);
   }
 
-  render () {
+  render() {
     let note = this.props.note;
     return (
       note.editStatus

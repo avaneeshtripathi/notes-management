@@ -1,4 +1,5 @@
 import Underscore from 'underscore';
+import AppConstants from '../AppConstants';
 
 const payload = {
   notesList: [],
@@ -6,12 +7,12 @@ const payload = {
   filterString: ''
 }
 
-function handleAddNote (updatedStatus) {
+function handleAddNote(updatedStatus) {
   payload.addNotesStatus = updatedStatus;
   return payload;
 }
 
-function addNote (formData) {
+function addNote(formData) {
   formData.id = Underscore.now();
   formData.editStatus = false;
   payload.notesList.push(formData);
@@ -19,7 +20,7 @@ function addNote (formData) {
   return payload;
 }
 
-function handleEditNote (noteId) {
+function handleEditNote(noteId) {
   payload.notesList = Underscore.map(payload.notesList, (note) => {
     if(note.id === noteId) {
       note.editStatus = true;
@@ -29,7 +30,7 @@ function handleEditNote (noteId) {
   return payload;
 }
 
-function updateNote (formData) {
+function updateNote(formData) {
   payload.notesList = Underscore.map(payload.notesList, (note) => {
     if(note.id === formData.id) {
       note.title = formData.title;
@@ -41,46 +42,46 @@ function updateNote (formData) {
   return payload;
 }
 
-function deleteNote (noteId) {
+function deleteNote(noteId) {
   payload.notesList = Underscore.reject(payload.notesList, (note) => {
     return note.id === noteId;
   });
   return payload;
 }
 
-function filterNote (filterString) {
+function filterNote(filterString) {
   payload.filterString = filterString;
   return payload;
 }
 
-export default function Reducer (state = payload, action) {
+export default function Reducer(state = payload, action) {
   switch (action.type) {
-    case 'HANDLE_ADD_NOTE':
+    case AppConstants.actions.handleAddNote:
       handleAddNote(action.status);
       return {
         ...payload
       };
-    case 'ADD_NOTE':
+    case AppConstants.actions.addNote:
       addNote(action.formData);
       return {
         ...payload
       };
-    case 'HANDLE_EDIT_NOTE':
+    case AppConstants.actions.editNote:
       handleEditNote(action.noteId);
       return {
         ...payload
       };
-    case 'UPDATE_NOTE':
+    case AppConstants.actions.updateNote:
       updateNote(action.formData);
       return {
         ...payload
       };
-    case 'DELETE_NOTE':
+    case AppConstants.actions.deleteNote:
       deleteNote(action.noteId);
       return {
         ...payload
       };
-    case 'FILTER_NOTE':
+    case AppConstants.actions.filterNote:
       filterNote(action.filterString);
       return {
         ...payload
