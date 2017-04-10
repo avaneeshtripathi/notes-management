@@ -64,22 +64,6 @@ class Container extends React.Component{
     return (
       <section className="container">
         <div className="header-controls">
-          {!this.props.addNotesStatus
-            ? <div className="add-filter-note clearfix">
-                <a href="javascript: void(0);" className="btn btn-default pull-left" onClick={this.handleAddNoteSection}>Add New Note</a>
-                <form ref="filterNotesForm" className="custom-form filter-form pull-left" onSubmit={this.filterNotes}>
-                  <input
-                    name="filter"
-                    defaultValue={this.props.filterString}
-                    type="text"
-                    className="form-control pull-left"
-                    placeholder="Filter note"
-                  />
-                  <button className="glyphicon glyphicon-search pull-left"></button>
-                </form>
-              </div>
-            : null
-          }
           {this.props.addNotesStatus
             ? <div className="form-wrapper">
                 <form ref="addNoteForm" className="add-note-form clearfix" onSubmit={this.submitForm}>
@@ -108,7 +92,19 @@ class Container extends React.Component{
                   </div>
                 </form>
               </div>
-            : null
+            : <div className="add-filter-note clearfix">
+                <a href="javascript: void(0);" className="btn btn-default pull-left" onClick={this.handleAddNoteSection}>Add New Note</a>
+                <form ref="filterNotesForm" className="custom-form filter-form pull-left" onSubmit={this.filterNotes}>
+                  <input
+                    name="filter"
+                    defaultValue={this.props.filterString}
+                    type="text"
+                    className="form-control pull-left"
+                    placeholder="Filter notes"
+                  />
+                  <button className="glyphicon glyphicon-search pull-left"></button>
+                </form>
+              </div>
           }
         </div>
         {this.getFilteredList().length

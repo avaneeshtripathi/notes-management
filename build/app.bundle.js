@@ -12586,27 +12586,6 @@ var Container = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'header-controls' },
-          !this.props.addNotesStatus ? _react2.default.createElement(
-            'div',
-            { className: 'add-filter-note clearfix' },
-            _react2.default.createElement(
-              'a',
-              { href: 'javascript: void(0);', className: 'btn btn-default pull-left', onClick: this.handleAddNoteSection },
-              'Add New Note'
-            ),
-            _react2.default.createElement(
-              'form',
-              { ref: 'filterNotesForm', className: 'custom-form filter-form pull-left', onSubmit: this.filterNotes },
-              _react2.default.createElement('input', {
-                name: 'filter',
-                defaultValue: this.props.filterString,
-                type: 'text',
-                className: 'form-control pull-left',
-                placeholder: 'Filter note'
-              }),
-              _react2.default.createElement('button', { className: 'glyphicon glyphicon-search pull-left' })
-            )
-          ) : null,
           this.props.addNotesStatus ? _react2.default.createElement(
             'div',
             { className: 'form-wrapper' },
@@ -12660,7 +12639,27 @@ var Container = function (_React$Component) {
                 )
               )
             )
-          ) : null
+          ) : _react2.default.createElement(
+            'div',
+            { className: 'add-filter-note clearfix' },
+            _react2.default.createElement(
+              'a',
+              { href: 'javascript: void(0);', className: 'btn btn-default pull-left', onClick: this.handleAddNoteSection },
+              'Add New Note'
+            ),
+            _react2.default.createElement(
+              'form',
+              { ref: 'filterNotesForm', className: 'custom-form filter-form pull-left', onSubmit: this.filterNotes },
+              _react2.default.createElement('input', {
+                name: 'filter',
+                defaultValue: this.props.filterString,
+                type: 'text',
+                className: 'form-control pull-left',
+                placeholder: 'Filter notes'
+              }),
+              _react2.default.createElement('button', { className: 'glyphicon glyphicon-search pull-left' })
+            )
+          )
         ),
         this.getFilteredList().length ? _react2.default.createElement(
           'ul',
